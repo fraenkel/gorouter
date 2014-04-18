@@ -1,11 +1,14 @@
 package common
 
 import (
+	steno "github.com/cloudfoundry/gosteno"
 	"net"
 	"strconv"
 
 	"github.com/nu7hatch/gouuid"
 )
+
+var log = steno.NewLogger("common.logger")
 
 func LocalIP() (string, error) {
 	addr, err := net.ResolveUDPAddr("udp", "1.2.3.4:1")

@@ -1,33 +1,18 @@
-package router
+package router_test
 
 import (
+	"github.com/cloudfoundry/gorouter/config"
+	"github.com/cloudfoundry/gorouter/registry"
+	"github.com/cloudfoundry/gorouter/test"
+	. "github.com/onsi/gomega"
+
 	"errors"
 	"fmt"
 	"net"
 	"os/exec"
 	"strconv"
-	"testing"
 	"time"
-
-	steno "github.com/cloudfoundry/gosteno"
-	. "launchpad.net/gocheck"
-
-	"github.com/cloudfoundry/gorouter/config"
 )
-
-func Test(t *testing.T) {
-	config := &steno.Config{
-		Sinks: []steno.Sink{},
-		Codec: steno.NewJsonCodec(),
-		Level: steno.LOG_INFO,
-	}
-
-	steno.Init(config)
-
-	// log = steno.NewLogger("test")
-
-	TestingT(t)
-}
 
 func SpecConfig(natsPort, statusPort, proxyPort uint16) *config.Config {
 	c := config.DefaultConfig()
@@ -70,38 +55,40 @@ func SpecConfig(natsPort, statusPort, proxyPort uint16) *config.Config {
 	return c
 }
 
-func StartNats(port int) *exec.Cmd {
-	cmd := exec.Command("gnatsd", "-p", strconv.Itoa(port), "--user", "nats", "--pass", "nats")
+func StartNats(port uint16, wait bool) *exec.Cmd {
+	cmd := exec.Command("gnatsd", "-p", strconv.Itoa(int(port)), "--user", "nats", "--pass", "nats")
 	err := cmd.Start()
-	if err != nil {
-		panic(fmt.Sprintf("NATS failed to start: %v\n", err))
+	Ω(err).ShouldNot(HaveOccurred())
+
+	if wait {
+		err = waitUntilNatsUp(port)
+		Ω(err).ShouldNot(HaveOccurred())
 	}
 
 	return cmd
 }
 
-func StopNats(cmd *exec.Cmd) {
+func StopNats(port uint16, cmd *exec.Cmd) {
 	cmd.Process.Kill()
 	cmd.Wait()
+
+	if port != 0 {
+		err := waitUntilNatsDown(port)
+		Ω(err).ShouldNot(HaveOccurred())
+	}
 }
 
 func nextAvailPort() uint16 {
 	listener, err := net.Listen("tcp", ":0")
-	if err != nil {
-		panic(err)
-	}
+	Ω(err).ShouldNot(HaveOccurred())
 
 	defer listener.Close()
 
 	_, portStr, err := net.SplitHostPort(listener.Addr().String())
-	if err != nil {
-		panic(err)
-	}
+	Ω(err).ShouldNot(HaveOccurred())
 
 	port, err := strconv.Atoi(portStr)
-	if err != nil {
-		panic(err)
-	}
+	Ω(err).ShouldNot(HaveOccurred())
 
 	return uint16(port)
 }
@@ -130,4 +117,42 @@ func waitUntilNatsDown(port uint16) error {
 	}
 
 	return errors.New("Waited too long for NATS to stop")
+}
+
+func waitMsgReceived(registry *registry.CFRegistry, app *test.TestApp, expectedToBeFound bool, timeout time.Duration) bool {
+	interval := time.Millisecond * 50
+	repetitions := int(timeout / interval)
+
+	for j := 0; j < repetitions; j++ {
+		received := true
+		for _, url := range app.Urls() {
+			_, ok := registry.Lookup(url)
+			if ok != expectedToBeFound {
+				received = false
+				break
+			}
+		}
+		if received {
+			return true
+		}
+		time.Sleep(interval)
+	}
+
+	return false
+}
+
+func waitAppRegistered(registry *registry.CFRegistry, app *test.TestApp, timeout time.Duration) bool {
+	return waitMsgReceived(registry, app, true, timeout)
+}
+
+func waitAppUnregistered(registry *registry.CFRegistry, app *test.TestApp, timeout time.Duration) bool {
+	return waitMsgReceived(registry, app, false, timeout)
+}
+
+func timeoutDialler() func(net, addr string) (c net.Conn, err error) {
+	return func(netw, addr string) (net.Conn, error) {
+		c, err := net.DialTimeout(netw, addr, 10*time.Second)
+		c.SetDeadline(time.Now().Add(2 * time.Second))
+		return c, err
+	}
 }

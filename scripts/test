@@ -11,6 +11,6 @@ export PATH=$FIRST_GOPATH/bin:$PATH
 
 go get -v github.com/apcera/gnatsd
 
-go test -v ./... "$@"
+ginkgo -r -failOnPending -randomizeAllSpecs -skipMeasurements=true -race "$@"
 
 echo "PASSED"
