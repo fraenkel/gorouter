@@ -24,7 +24,10 @@ func main() {
 
 	log.SetupLoggerFromConfig(c)
 
-	router.NewRouter(c).Run()
+	errChan := router.NewRouter(c).Run()
 
-	select {}
+	select {
+	case err := <-errChan:
+		log.Errorf("Error occurred:", err.Error())
+	}
 }
