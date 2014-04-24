@@ -19,28 +19,36 @@
 			"Rev": "5eb8c6e554f0dfc39d6468813b8ac19ec28fe74f"
 		},
 		{
+			"ImportPath": "github.com/cloudfoundry/gunk/natsrunner",
+			"Rev": "8c166e2e973df123b29351b396bb8d356192bd81"
+		},
+		{
+			"ImportPath": "github.com/cloudfoundry/gunk/runner_support",
+			"Rev": "8c166e2e973df123b29351b396bb8d356192bd81"
+		},
+		{
 			"ImportPath": "github.com/cloudfoundry/loggregatorlib/cfcomponent/instrumentation",
-			"Rev": "1ff4fff71d4839f6c429289a1169e38de205d14e"
+			"Rev": "90e9aee1f6ae4ba750c6656c3fb529bf217b4908"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/loggregatorlib/cfcomponent/localip",
-			"Rev": "1ff4fff71d4839f6c429289a1169e38de205d14e"
+			"Rev": "90e9aee1f6ae4ba750c6656c3fb529bf217b4908"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/loggregatorlib/emitter",
-			"Rev": "1ff4fff71d4839f6c429289a1169e38de205d14e"
+			"Rev": "90e9aee1f6ae4ba750c6656c3fb529bf217b4908"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/loggregatorlib/loggregatorclient",
-			"Rev": "1ff4fff71d4839f6c429289a1169e38de205d14e"
+			"Rev": "90e9aee1f6ae4ba750c6656c3fb529bf217b4908"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/loggregatorlib/logmessage",
-			"Rev": "1ff4fff71d4839f6c429289a1169e38de205d14e"
+			"Rev": "90e9aee1f6ae4ba750c6656c3fb529bf217b4908"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/loggregatorlib/signature",
-			"Rev": "1ff4fff71d4839f6c429289a1169e38de205d14e"
+			"Rev": "90e9aee1f6ae4ba750c6656c3fb529bf217b4908"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/yagnats",
@@ -61,6 +69,10 @@
 		{
 			"ImportPath": "github.com/rcrowley/go-metrics",
 			"Rev": "d1774362a14f30b8eb31af8867bfb15142263644"
+		},
+		{
+			"ImportPath": "github.com/vito/cmdtest",
+			"Rev": "215c451d78ba1382cbccb2736c280c60a11b4b86"
 		}
 	]
 }
