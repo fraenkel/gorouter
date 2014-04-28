@@ -20,11 +20,7 @@
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/gunk/natsrunner",
-			"Rev": "8c166e2e973df123b29351b396bb8d356192bd81"
-		},
-		{
-			"ImportPath": "github.com/cloudfoundry/gunk/runner_support",
-			"Rev": "8c166e2e973df123b29351b396bb8d356192bd81"
+			"Rev": "3a9f0a4e890ae5efa2e29703cf5359c4bd9e4c8f"
 		},
 		{
 			"ImportPath": "github.com/cloudfoundry/loggregatorlib/cfcomponent/instrumentation",
@@ -60,11 +56,11 @@
 		},
 		{
 			"ImportPath": "github.com/onsi/ginkgo",
-			"Rev": "462cb7e31b222093d2fd2f4f0cbbce324f6ab3be"
+			"Rev": "6d349e912f98605cd6b032a6e0a24c90c2d3bf47"
 		},
 		{
 			"ImportPath": "github.com/onsi/gomega",
-			"Rev": "f1c0de3870567f8828e4d040e5a8aeed8afff3f5"
+			"Rev": "af40dc423678b84288e18d0b993770cf9d599a68"
 		},
 		{
 			"ImportPath": "github.com/rcrowley/go-metrics",
@@ -72,7 +68,7 @@
 		},
 		{
 			"ImportPath": "github.com/vito/cmdtest",
-			"Rev": "215c451d78ba1382cbccb2736c280c60a11b4b86"
+			"Rev": "7949d8f2b06890d93ca31d3056de240b9d7c3bd5"
 		}
 	]
 }

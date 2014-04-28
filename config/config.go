@@ -74,13 +74,13 @@ type Config struct {
 	EndpointTimeoutInSeconds             int `yaml:"endpoint_timeout"`
 
 	// These fields are populated by the `Process` function.
-	PruneStaleDropletsInterval time.Duration
-	DropletStaleThreshold      time.Duration
-	PublishActiveAppsInterval  time.Duration
-	StartResponseDelayInterval time.Duration
-	EndpointTimeout            time.Duration
+	PruneStaleDropletsInterval time.Duration `yaml:"-"`
+	DropletStaleThreshold      time.Duration `yaml:"-"`
+	PublishActiveAppsInterval  time.Duration `yaml:"-"`
+	StartResponseDelayInterval time.Duration `yaml:"-"`
+	EndpointTimeout            time.Duration `yaml:"-"`
 
-	Ip string
+	Ip string `yaml:"-"`
 }
 
 var defaultConfig = Config{
