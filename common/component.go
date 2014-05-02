@@ -81,7 +81,7 @@ func (c *VcapComponent) Start() error {
 			return err
 		}
 
-		c.Host = fmt.Sprintf("%s:%s", host, port)
+		c.Host = fmt.Sprintf("%s:%d", host, port)
 	}
 
 	if c.Credentials == nil || len(c.Credentials) != 2 {

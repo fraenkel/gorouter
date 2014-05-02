@@ -260,9 +260,9 @@ func (r *Router) greetMessage() ([]byte, error) {
 	}
 
 	d := vcap.RouterStart{
-		uuid,
-		[]string{host},
-		r.config.StartResponseDelayIntervalInSeconds,
+		Id:    uuid,
+		Hosts: []string{host},
+		MinimumRegisterIntervalInSeconds: r.config.StartResponseDelayIntervalInSeconds,
 	}
 
 	return json.Marshal(d)

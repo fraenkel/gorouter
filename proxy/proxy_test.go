@@ -821,7 +821,7 @@ func registerHandler(r *registry.RouteRegistry, u string, h connHandler) net.Lis
 					if max := 1 * time.Second; tempDelay > max {
 						tempDelay = max
 					}
-					println("http: Accept error: %v; retrying in %v", err, tempDelay)
+					fmt.Printf("http: Accept error: %v; retrying in %v\n", err, tempDelay)
 					time.Sleep(tempDelay)
 					continue
 				}

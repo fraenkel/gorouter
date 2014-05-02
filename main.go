@@ -98,7 +98,7 @@ func main() {
 	select {
 	case err := <-errChan:
 		if err != nil {
-			logger.Errorf("Error occurred:", err.Error())
+			logger.Errorf("Error occurred: %s", err.Error())
 			os.Exit(1)
 		}
 	case sig := <-signals:
