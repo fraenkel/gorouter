@@ -56,15 +56,15 @@
 		},
 		{
 			"ImportPath": "github.com/onsi/ginkgo",
-			"Rev": "1e48048b2e01c7f1830144e30eea21db3cd3b574"
+			"Rev": "2a0c5c3f92805fd1f431dfbe22625e811b6b3f18"
 		},
 		{
 			"ImportPath": "github.com/onsi/gomega",
-			"Rev": "e287925a206d2f7cf070e08c082ed93dd38fcecc"
+			"Rev": "660b70079010c9eeeffdc381fcb3a8cde45ce495"
 		},
 		{
 			"ImportPath": "github.com/rcrowley/go-metrics",
-			"Rev": "d1774362a14f30b8eb31af8867bfb15142263644"
+			"Rev": "6a6467422096534d9edb0edbe33ad6c30320a55a"
 		}
 	]
 }
