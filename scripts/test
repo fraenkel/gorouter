@@ -2,6 +2,16 @@
 
 set -e -x
 
+function printStatus {
+      if [ $? -eq 0 ]; then
+          echo -e "\nSWEET SUITE SUCCESS"
+      else
+          echo -e "\nSUITE FAILURE"
+      fi
+  }
+
+trap printStatus EXIT
+
 export GOPATH=$PWD/Godeps/_workspace:$GOPATH
 
 FIRST_GOPATH=`echo $GOPATH | cut -d':' -f1`
@@ -12,5 +22,3 @@ export PATH=$FIRST_GOPATH/bin:$PATH
 go get -v github.com/apcera/gnatsd
 
 ginkgo -r -failOnPending -randomizeAllSpecs -skipMeasurements=true -race "$@"
-
-echo "PASSED"
